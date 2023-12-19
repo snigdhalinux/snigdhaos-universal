@@ -15,7 +15,7 @@ elif [ "$task" == "keyring" ]; then
     keyring=true
 elif [ "$task" == "fix" ]; then
     if [ "$VERSION" != 1 ]; then
-        echo "This will reset a few configuration files like pacman.conf 🛑"
+        echo "This will reset a few configuration files like pacman.conf ⚠️"
         echo "Proceed? (y/n)"
         read yusure
         [ $yusure != "y" ] && exit 1
@@ -24,9 +24,9 @@ elif [ "$task" == "fix" ]; then
     reset_pacman=true
 elif [ "$task" == "fullfix" ]; then
     if [ "$VERSION" != 1 ]; then
-        echo "This will reset a few configuration files like pacman.conf 🛑"
+        echo "This will reset a few configuration files like pacman.conf ⚠️"
         echo -e "\033[1;33mWarning: Fullfix mode! This will reinstall all packages!\033[0m"
-        echo "Are you sure? (y/n)"
+        echo "Proceed? (y/n)"
         read yusure
         [ $yusure != "y" ] && exit 1
     fi
@@ -35,7 +35,7 @@ elif [ "$task" == "fullfix" ]; then
     internal_update=2
 elif [ "$task" == "reinstall" ]; then
     echo -e "\033[1;33mWarning: This will reinstall all packages!\033[0m"
-    echo "Are you sure? (y/n)"
+    echo "Proceed? (y/n)"
     read yusure
     [ $yusure != "y" ] && exit 1
     internal_update=2
@@ -84,7 +84,7 @@ if [ "$keyring" = true ]; then
     rm -rf /var/lib/pacman/sync
     pacman-key --init
     pacman-key --populate archlinux chaotic || { echo -e "\033[1;31m\nFailed to populate keyrings\n\033[0m"; }
-    pacman-key --recv-key FBA220DFC880C036 6D42BDD116E0068F --keyserver keyserver.ubuntu.com && pacman-key --lsign-key FBA220DFC880C036 6D42BDD116E0068F || { echo -e "\033[1;31m\nFailed to install some keys\n\033[0m"; }
+    pacman-key --recv-key 16D18BF92792DCCF --keyserver keyserver.ubuntu.com && pacman-key --lsign-key 16D18BF92792DCCF || { echo -e "\033[1;31m\nFailed to install some keys\n\033[0m"; }
     rm /var/cache/pacman/pkg/* || true
 fi
 # Re-set-up blackarch
@@ -100,7 +100,7 @@ if [ "$internal_update" = "1" ]; then
 elif [ "$internal_update" = "2" ]; then
     $pacman -Qqn | $pacman -Sy -
 else
-    SKIP_AUTOSNAP=1 SNAP_PAC_SKIP=y $pacman -Sy --noconfirm --overwrite='*' garuda-update
+    SKIP_AUTOSNAP=1 SNAP_PAC_SKIP=y $pacman -Sy --noconfirm --overwrite='*' snigdhaos-update
     PACMAN_EXE="$pacman" update
 fi
 
