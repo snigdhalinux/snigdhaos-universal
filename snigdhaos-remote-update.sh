@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
+## Thanks to Garuda Team
+
 task=${1:-'fix'}
 
 keyring=false
@@ -14,7 +16,7 @@ elif [ "$task" == "keyring" ]; then
 elif [ "$task" == "fix" ]; then
     if [ "$VERSION" != 1 ]; then
         echo "This will reset a few configuration files like pacman.conf 🛑"
-        echo "Are you sure? (y/n)"
+        echo "Proceed? (y/n)"
         read yusure
         [ $yusure != "y" ] && exit 1
     fi
