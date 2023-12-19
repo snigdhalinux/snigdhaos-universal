@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# Author: Eshan Roy <src.eshan@gmail.com>
+# Url: https://eshanized.github.io
+
+echo ""
+echo "Snigdha OS Full System Updater..."
+echo "Initiating system update..."
+echo "Synchronizing package database..."
+echo ""
+
+#Synchroning...
+sudo pacman -Sy
+
+#Checking...
+echo ""
+echo "Checking for system updates..."
+echo ""
+sudo pacman -Qu
+
+
+read -p "Proceed with the Snigdha OS System Update? (y/n): " answer
+
+if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
+    echo "Snigdha OS is updating the system..."
+    sudo pacman -Syu --noconfirm
+    echo "System update complete! :)"
+else
+    echo "System update cancelled! :("
+fi
