@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+# Author : Eshan Roy <src.eshan@gmail.com>
+# URL : https://eshanized.github.io
+
 # Check if the script is being run as root
 if [[ $EUID -ne 0 ]]; then
     echo "This script must be run as root!"
