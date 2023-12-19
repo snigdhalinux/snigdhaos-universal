@@ -24,7 +24,7 @@ read -p "Proceed with the Snigdha OS System Update? (y/n): " answer
 if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
     echo "Snigdha OS is updating the system..."
     sudo pacman -Syu --noconfirm
-    echo "System update complete! :)"
+    echo "System update completed! :)"
 else
-    echo "System update cancelled! :("
+    echo "System update cancelled by user! :("
 fi
